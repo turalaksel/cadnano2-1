@@ -307,7 +307,8 @@ class DocumentController():
         #print "closing"
         if util.isWindows():
             #print "close win"
-            self.win.close()
+            if self.win is not None:
+                self.win.close()
             if not app().isInMaya():
                 #print "exit app"
                 import sys
@@ -355,7 +356,7 @@ class DocumentController():
             fname = selected[0]
         else:
             fname = selected
-        if fname.isEmpty() or os.path.isdir(fname):
+        if not fname or fname is None or os.path.isdir(fname):
             return False
         fname = str(fname)
         if not fname.lower().endswith(".svg"):
@@ -758,6 +759,8 @@ class DocumentController():
             assert(not self._hasNoAssociatedFile)
             filename = self.filename()
         try:
+            if util.isWindows():
+                filename = filename[0]
             with open(filename, 'w') as f:
                 helixOrderList = self.win.pathroot.getSelectedPartOrderedVHList()
                 encode(self._document, helixOrderList, f)
