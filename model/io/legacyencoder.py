@@ -39,5 +39,5 @@ def legacy_dict_from_doc(document, fname, helixOrderList):
                   "stap_colors": stapColors}
         vhList.append(vhDict)
     bname = basename(str(fname))
-    obj = {"name": bname, "vstrands": vhList}
+    obj = {"name": bname, "sequenceOffset": part.getSequenceOffset(), "vstrands": vhList}
     return obj

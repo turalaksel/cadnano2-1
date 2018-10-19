@@ -210,6 +210,10 @@ def import_legacy_dict(document, obj, latticeType=LatticeType.Honeycomb):
             defaultColor = styles.DEFAULT_SCAF_COLOR
         oligo.applyColor(defaultColor, useUndoStack=False)
 
+    # SEQUENCE OFFSET
+    if "sequenceOffset" in obj:
+        part.setSequenceOffset(obj["sequenceOffset"])
+
     # COLORS, INSERTIONS, SKIPS
     for helix in obj['vstrands']:
         vhNum = helix['num']

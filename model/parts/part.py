@@ -73,6 +73,8 @@ class Part(QObject):
         self._activeBaseIndex = self._step
         self._activeVirtualHelix = None
         self._activeVirtualHelixIdx = None
+        # Sequence Offset
+        self._sequenceOffset = 0
 
     # end def
 
@@ -109,6 +111,14 @@ class Part(QObject):
 
     def setDocument(self, document):
         self._document = document
+    # end def
+
+    def getSequenceOffset(self):
+        return self._sequenceOffset
+    # end def
+
+    def setSequenceOffset(self, offset=0):
+        self._sequenceOffset = offset
     # end def
 
     def stepSize(self):
