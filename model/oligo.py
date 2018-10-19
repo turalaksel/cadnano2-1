@@ -135,7 +135,7 @@ class Oligo(QObject):
             return False
         if self.length() < 18:
             return True
-        if self.length() > 50:
+        if self.length() > 60:
             return True
         return False
     # end def
@@ -303,7 +303,12 @@ class Oligo(QObject):
         def __init__(self, oligo, sequence):
             super(Oligo.ApplySequenceCommand, self).__init__()
             self._oligo = oligo
-            self._newSequence = sequence
+            self._part = oligo.part()
+            self._sequenceOffset = self._part.getSequenceOffset()
+            if sequence:
+                self._newSequence = sequence[self._sequenceOffset:] + sequence[:self._sequenceOffset]
+            else:
+                self._newSequence = sequence
             self._oldSequence = oligo.sequence()
             self._strandType = oligo._strand5p.strandSet().strandType()
         # end def
